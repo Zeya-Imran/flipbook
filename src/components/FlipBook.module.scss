@@ -90,7 +90,7 @@
 .navButtonLeft,
 .navButtonRight {
   position: absolute;
-  top: 20%;
+  top: 50%;
 
   transform: translateY(-50%);
 
@@ -103,8 +103,8 @@
   cursor: pointer;
   z-index: 1000;
 
-  background: #9078d4;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 
   font-size: 20px;
   font-weight: bold;

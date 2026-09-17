@@ -109,7 +109,25 @@ export const FlipBook = () => {
     };
   };
 
+  const isNavigationButtonTouch = (
+    event: React.TouchEvent<HTMLDivElement>
+  ): boolean => {
+    return event.target instanceof HTMLElement &&
+      Boolean(event.target.closest("button"));
+  };
+
   const handlePinchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (
+      isMobile &&
+      event.touches.length === 1 &&
+      zoomScale <= 1 &&
+      !isNavigationButtonTouch(event)
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     if (event.touches.length === 1 && zoomScale > 1) {
       event.preventDefault();
       event.stopPropagation();
@@ -132,6 +150,17 @@ export const FlipBook = () => {
   };
 
   const handlePinchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (
+      isMobile &&
+      event.touches.length === 1 &&
+      zoomScale <= 1 &&
+      !isNavigationButtonTouch(event)
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     if (event.touches.length === 1 && zoomScale > 1) {
       event.preventDefault();
       event.stopPropagation();
@@ -207,6 +236,17 @@ export const FlipBook = () => {
   };
 
   const handlePinchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (
+      isMobile &&
+      event.touches.length === 0 &&
+      zoomScale <= 1 &&
+      !isNavigationButtonTouch(event)
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     if (pinchStartDistance.current !== null || zoomScale > 1) {
       event.preventDefault();
       event.stopPropagation();
@@ -311,11 +351,11 @@ export const FlipBook = () => {
         {/* Previous button */}
         {currentPage > 1 && (
           <button
+            type="button"
             className={styles.navButtonLeft}
             onClick={() => {
-              bookRef.current
-                ?.pageFlip()
-                ?.flipPrev();
+              console.log("Previous button clicked");
+              bookRef.current?.flipPrev();
             }}
           >
             ❮
@@ -347,9 +387,19 @@ export const FlipBook = () => {
             maxShadowOpacity={0.2}
             showPageCorners={true}
             flippingTime={200}
+            onInit={() => {
+              console.log("FlipBook initialized", {
+                pageCount: bookRef.current?.getPageCount?.(),
+              });
+            }}
             onFlip={(e: any) => {
               const newPage = e.data + 1;
 
+              console.log("FlipBook changed page", {
+                previousPage: currentPage,
+                newPage,
+                eventData: e.data,
+              });
               setPreviousPage(currentPage);
               setCurrentPage(newPage);
             }}
@@ -366,11 +416,11 @@ export const FlipBook = () => {
         {/* Next button */}
         {currentPage < pages.length && (
           <button
+            type="button"
             className={styles.navButtonRight}
             onClick={() => {
-              bookRef.current
-                ?.pageFlip()
-                ?.flipNext();
+              console.log("Next button clicked");
+              bookRef.current?.flipNext();
             }}
           >
             ❯
