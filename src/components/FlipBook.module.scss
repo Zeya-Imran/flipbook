@@ -1,0 +1,182 @@
+.flipbookSpwp {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* =========================================
+   FLIPBOOK WRAPPER
+   ========================================= */
+
+.flipbookWrapper {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden !important;
+  position: relative;
+}
+
+/* =========================================
+   BOOK CONTAINER
+   ========================================= */
+
+.flipbookContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden !important;
+  width: 100%;
+  max-width: 1200px;
+  transform-origin: center center;
+}
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden !important;
+  background: transparent;
+}
+
+/* Book fold effect */
+
+.page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.15),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* React-flipbook internal elements */
+
+.flipbookWrapper,
+.page,
+:global(.stf__parent),
+:global(.stf__wrapper),
+:global(.stf__block),
+:global(.stf__item) {
+  overflow: hidden !important;
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =========================================
+   NAVIGATION BUTTONS
+   ========================================= */
+
+.navButtonLeft,
+.navButtonRight {
+  position: absolute;
+  top: 20%;
+
+  transform: translateY(-50%);
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  background: #9078d4;
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2);
+
+  transition: all 0.25s ease;
+}
+
+.navButtonLeft:hover,
+.navButtonRight:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.navButtonLeft {
+  left: 10px;
+}
+
+.navButtonRight {
+  right: 10px;
+}
+
+.pageCounter {
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   REACT FLIPBOOK OVERRIDES
+   ========================================= */
+
+:global(.stf__parent) {
+  margin: auto;
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (max-width: 1024px) {
+  .flipbookWrapper {
+    padding: 10px;
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .navButtonLeft,
+  .navButtonRight {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  .navButtonLeft {
+    left: 5px;
+  }
+
+  .navButtonRight {
+    right: 5px;
+  }
+
+  .pageCounter {
+    bottom: -40px;
+    font-size: 12px;
+  }
+}
