@@ -14,16 +14,6 @@ interface IPageProps {
 }
 
 const BookPages: IBookPage[] = [
-  {
-    id: 1,
-    pageNumber: 1,
-    imageUrl: "1.jpg",
-  },
-  {
-    id: 2,
-    pageNumber: 2,
-    imageUrl: "2.jpg",
-  },
     {
     id: 3,
     pageNumber: 3,
@@ -31,14 +21,33 @@ const BookPages: IBookPage[] = [
   },  {
     id: 4,
     pageNumber: 4,
-    imageUrl: "5.jpg",
+    imageUrl: "4.jpg",
   },
    {
     id: 5,
     pageNumber: 5,
-    imageUrl: "4.jpg",
+    imageUrl: "5.jpg",
   },
-  
+    {
+    id: 6,
+    pageNumber: 6,
+    imageUrl: "6.jpg",
+  },
+    {
+    id: 7,
+    pageNumber: 7,
+    imageUrl: "7.jpg",
+  },
+    {
+    id: 8,
+    pageNumber: 8,
+    imageUrl: "8.jpg",
+  },
+    {
+    id: 9,
+    pageNumber: 9,
+    imageUrl: "9.jpg",
+  },
   
 ];
 
